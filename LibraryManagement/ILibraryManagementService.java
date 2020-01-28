@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface ILibraryManagement{
+public interface ILibraryManagementService{
 
 	public List<Book> loadAllBooks();
 	

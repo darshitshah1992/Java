@@ -9,7 +9,7 @@ public class LibraryManagement{
 
 		library.createMenu();
 
-		ILibraryManagement libraryService = new LibraryManagementImpl();
+		ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
 		List<Book> allBooks = libraryService.loadAllBooks();
 		System.out.println(allBooks.size());
 	
