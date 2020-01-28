@@ -1,2 +1,2 @@
 Readme file for Library Management
-Clone the project
+Clone the project and navigate to LibraryManagement.java
