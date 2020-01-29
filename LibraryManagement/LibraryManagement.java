@@ -10,7 +10,6 @@ public class LibraryManagement{
 	private String searchConst = "Search: ";
 	private String enterConst = "<Enter>";
 	private String searchResultsConst = "The following books matched your query. Enter the book ID to see more details, or <Enter> to return.";
-	//private String searchMessageConst = "Type in one or more keywords to search for";
 	private String bookManagerConst = "==== Book Manager ====";
 	private String editManagerConst = "==== Edit a Book ====";
 	private String searchManagerConst = "==== Search ====";
@@ -45,52 +44,50 @@ public class LibraryManagement{
 
 		library.createMenu();
 
-		//ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
-		//List<Book> allBooks = libraryService.loadAllBooks();
-		//System.out.println(allBooks.size());
-		//
 		Scanner scanner = new Scanner(System.in);
-		//System.out.print("\n"+ menuOptionConst);
 
-		int inputOption = scanner.nextInt();
-		while(inputOption!=saveOptionConst){
-			try{	
+		String input = scanner.nextLine();
+		boolean flag = true;
+		while(flag){
+			try{
+				int inputOption = Integer.parseInt(input);
 				switch(inputOption){
 					case 1:
 						library.viewAllBooks();
 						break;
 					case 2:
 						library.addBookToLibrary();
-						//libraryService.createBook(book);
 						break;
 					case 3:
 						library.modifyLibraryBook();
-						//boolean modifyFlag = libraryService.modifyBook(book);
 						break;
 					case 4:
 						library.lookForBook();
 						break;
+					case 5:
+						library.saveLibraryStatus();
+						flag = false;
+						break;
 					default:	
-						//library.createMenu();
 						break;
 				
 				}
 
-				library.createMenu();
-				inputOption = scanner.nextInt();
+				if(flag){
+					library.createMenu();
+					input = scanner.nextLine();
+				}
 			}
 			catch(NumberFormatException e){
 			
 				library.createMenu();
-				inputOption = scanner.nextInt();
+				input = scanner.nextLine();
 			}
 			catch(Exception ex){
 				library.createMenu();
-				inputOption = scanner.nextInt();
+				input = scanner.nextLine();
 			}
 		}
-
-		library.saveLibraryStatus();
 	}
 
 	public void createMenu(){
@@ -107,7 +104,6 @@ public class LibraryManagement{
 	
 	public void viewAllBooks(){
 
-		//ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
 		List<Book> allBooks = libraryService.loadAllBooks();
 		
 		System.out.println(viewBookConst + "\n");
@@ -129,9 +125,6 @@ public class LibraryManagement{
 				displayBookDetails(bookID, allBooks);
 			}
 			catch(NumberFormatException e){
-				//System.out.println();
-				//System.out.print(viewBookMessage);
-				//inputOption = scanner.next();
 			}
 			System.out.println();
 			System.out.println(viewBookMessage);
@@ -141,14 +134,15 @@ public class LibraryManagement{
 	}
 
 	public void displayBookTitles(List<Book> bookList){
+
 		for(Book book: bookList){
 			System.out.println("["+book.getID()+"] "+ book.getTitle());
 		}
 	}
 
 	public void displayBookDetails(int bookID, List<Book> bookList){
+		
 		for(Book book: bookList){
-
 			if(book.getID()==bookID){
 				System.out.println(idConst + book.getID());
 				System.out.println(titleConst + book.getTitle());
@@ -167,8 +161,6 @@ public class LibraryManagement{
 		System.out.println(addBookConst);
 
 		System.out.println(addBookMessage);
-
-		//ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
 
 		Scanner scanner = new Scanner(System.in);
 		Book book = new Book();
@@ -191,7 +183,6 @@ public class LibraryManagement{
 
 		System.out.println(editManagerConst);
 
-		//ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
 		List<Book> allBooks = libraryService.loadAllBooks();
 		displayBookTitles(allBooks);
 		
@@ -206,8 +197,6 @@ public class LibraryManagement{
 		while(!input.isEmpty()){
 
 			try{
-				//System.out.print(searchBookIdConst);
-				
 				int bookId = Integer.parseInt(input);
 				System.out.println();
 				System.out.println(editMessage);
@@ -235,7 +224,8 @@ public class LibraryManagement{
 
 				System.out.println();
 				System.out.println(editConst);
-				
+
+				System.out.print(searchBookIdConst);
 				input = scanner.nextLine();
 			}
 			catch(Exception e){
@@ -261,14 +251,14 @@ public class LibraryManagement{
 
 		String searchString = scanner.nextLine();
 
-		//ILibraryManagementService libraryService = new LibraryManagementServiceImpl();
 		List<Book> searchedBooks = libraryService.lookForBook(searchString);
+		System.out.println(searchDetailConst + "\n");
+		
 		displayBookTitles(searchedBooks);
 		
-		System.out.print(searchBookIdConst);
 		System.out.println();
+		System.out.print(searchBookIdConst);
 
-		//
 		String inputOption = scanner.nextLine();
 
 		while(!inputOption.isEmpty()){
@@ -278,9 +268,6 @@ public class LibraryManagement{
 				displayBookDetails(bookID, searchedBooks);
 			}
 			catch(NumberFormatException e){
-				//System.out.println();
-				//System.out.print(viewBookMessage);
-				//inputOption = scanner.next();
 			}
 			System.out.println();
 			System.out.print(searchBookIdConst);
@@ -295,7 +282,7 @@ public class LibraryManagement{
 			System.out.println(librarySaveMessage);
 			
 		}else{
-			System.out.println(saveErrorMessage); //"Error occurred while saving the library to file.");
+			System.out.println(saveErrorMessage);
 		}
 	}
 }

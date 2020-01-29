@@ -11,6 +11,10 @@ public class LibraryManagementDaoImpl implements ILibraryManagementDao{
 
 	List<Book> books = new ArrayList<Book>();
 
+	public LibraryManagementDaoImpl(){
+		readFromFile();
+	}
+
 	@Override
 	public int insertBook(Book book){
 		book.setID(books.size()+1);
@@ -21,7 +25,6 @@ public class LibraryManagementDaoImpl implements ILibraryManagementDao{
 
 	@Override
 	public List<Book> getAllBooks(){
-		//add logic to load books from file if empty
 		if(books.size()==0){
 			readFromFile();
 		}
@@ -32,7 +35,6 @@ public class LibraryManagementDaoImpl implements ILibraryManagementDao{
 
 	@Override
 	public boolean updateBook(Book book){
-		//boolean flag = true;
 		int size = books.size();
 		for(int index=0;index<size;index++){
 			if(book.getID() == books.get(index).getID()){
