@@ -2,7 +2,7 @@ import java.util.List;
 
 public interface ILibraryManagementDao{
 
-	public void insertBook(Book book);
+	public int insertBook(Book book);
 
 	public List<Book> getAllBooks();
 

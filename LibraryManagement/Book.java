@@ -5,11 +5,11 @@ public class Book{
 	private String author;
 	private String description;
 
-	public void setId(int id){
+	public void setID(int id){
 		this.id = id;
 	}
 
-	public int getId(){
+	public int getID(){
 		return id;
 	}
 
@@ -31,6 +31,10 @@ public class Book{
 
 	public void setDescription(String description){
 		this.description = description;
+	}
+
+	public String getDescription(){
+		return description;
 	}
 
 }

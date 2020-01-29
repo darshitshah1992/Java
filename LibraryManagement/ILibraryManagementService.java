@@ -4,7 +4,7 @@ public interface ILibraryManagementService{
 
 	public List<Book> loadAllBooks();
 	
-	public void createBook(Book book);
+	public int createBook(Book book);
 
 	public boolean modifyBook(Book book);
 
